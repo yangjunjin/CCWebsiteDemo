@@ -19,17 +19,18 @@ public class ComponentA implements IComponent {
         //指定组件的名称
         return "ComponentA";
     }
+
     @Override
     public boolean onCall(CC cc) {
         String actionName = cc.getActionName();
         switch (actionName) {
             case "LoginActivity": //响应actionName为"showActivity"的组件调用
-                Log.e("ComponentA==","我过来了");
+                Log.e("ComponentA==", "我过来了");
                 //跳转到页面：ActivityA
                 CCUtil.navigateTo(cc, LoginActivity.class);
                 //返回处理结果给调用方
-                CCResult result =CCResult.success().addData("yjj","我是最帅的");
-                CC.sendCCResult(cc.getCallId(),result);
+                CCResult result = CCResult.success("success", "成功的数据").addData("addData", "另外的数据");
+                CC.sendCCResult(cc.getCallId(), result);
                 //同步方式实现（在return之前听过CC.sendCCResult()返回组件调用结果），return false
                 return false;
             default:
